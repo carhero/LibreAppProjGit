@@ -55,7 +55,8 @@ public class LodingActivity extends BaseActivity {
 			}
 			if (msg.what == 0x03) {
                 if (isWifiConnected()) {
-                    startActivity(new Intent(LodingActivity.this, MainActivity.class));
+                    //startActivity(new Intent(LodingActivity.this, MainActivity.class));	// yhcha modified 10.20 from
+					startActivity(new Intent(LodingActivity.this, MainSelectPage.class));	// yhcha modified 10.20 to
                     finish();
                 }
                 else {

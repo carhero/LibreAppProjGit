@@ -220,6 +220,4 @@
         android:layout_marginRight="@dimen/norEdgeMargin"
         android:background="@drawable/noteimg" />
 
-
-
 </RelativeLayout>

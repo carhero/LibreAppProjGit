@@ -49,6 +49,10 @@
         <activity android:name="com.libre.client.activity.GroupListActivity" />
         <activity android:name="com.libre.client.activity.LmpListViewActivity" />
         <activity android:name="com.libre.client.activity.LuciMessenger" />
+        <activity
+            android:name="com.libre.client.activity.MainSelectPage"
+            android:label="@string/app_name" >
+        </activity>
 
         <service android:name="com.app.dlna.dmc.processor.upnp.CoreUpnpService" />
 

@@ -54,6 +54,11 @@
         <activity android:name=".LmpListViewActivity"/>
         <activity android:name=".LuciMessenger"/>
 
+        <activity
+            android:name="com.libre.client.activity.MainSelectPage"
+            android:label="@string/app_name" >
+        </activity>
+
         <service android:name="com.app.dlna.dmc.processor.upnp.CoreUpnpService" />
         <receiver android:name=".NetworkStateReceiver" >
     <intent-filter>
