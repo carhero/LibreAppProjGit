@@ -49,7 +49,7 @@ public class DMRActivity extends BaseActivity {
 	private static List<DMRDev> devList = new ArrayList<DMRDev>();
 		@Override
 	protected void loadViewLayout() {
-		setContentView(R.layout.mastersetting);        
+		setContentView(R.layout.mastersetting);
 		NetUiUtils.canNetWorkOperateInMainThread();
 	}
 		private void StartLSSDPScan() {
@@ -120,6 +120,7 @@ public class DMRActivity extends BaseActivity {
 	protected void onCreate(Bundle paramBundle) {
 		// TODO Auto-generated method stub
 		super.onCreate(paramBundle);
+		getSupportActionBar().hide();
 	}
 	
 	@Override
@@ -129,7 +130,6 @@ public class DMRActivity extends BaseActivity {
 		//m_refresh.performClick();
 		StartLSSDPScan();
 		super.onResume();
-		
 	}
 	
 	@Override

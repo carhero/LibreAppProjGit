@@ -46,6 +46,8 @@ public class DMSListActivity extends UpnpListenerActivity {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.dmslist_activity);
+        getSupportActionBar().hide();
+
 		m_myApp = (LibreApplication)getApplication();
 		m_adapter = new RemoteDMSArrayAdapter(this, 0, 0);
 		
@@ -120,7 +122,9 @@ public class DMSListActivity extends UpnpListenerActivity {
 //			m_myApp.setMusicUdn(m_myApp.getLocalDeviceUdn());
 			m_myApp.setDmsBrowseHelperTemp(
 					new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
-			
+
+            //Log.d("DMSListActivity", "My device clicked");
+
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
 			startActivity(intent);
             Constant.isUpNPbroswer=false;
@@ -131,7 +135,7 @@ public class DMSListActivity extends UpnpListenerActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		m_adapter.clear();
 		Collection<RemoteDevice> devices = UpnpDeviceManager.getInstance().getRemoteDms();
 		if (devices == null) {

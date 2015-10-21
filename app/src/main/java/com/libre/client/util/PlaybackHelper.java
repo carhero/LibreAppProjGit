@@ -36,7 +36,7 @@ public class PlaybackHelper implements DMRProcessorListener {
 		return singer;
 	}
 
-	public String getSongName() {
+    public String getSongName() {
 		return songName;
 	}
 

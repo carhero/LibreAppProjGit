@@ -238,7 +238,10 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		m_upnpProcessor.addListener(MainActivity.this);
 		String udn = m_myApp.getCurrentDmrDeviceUdn();
 		if (udn == null || udn == "")
+		{
+			Log.d("Main Activity", "Null Error!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			return;
+		}
 		m_playbackHelper = m_myApp.getCurrentPlaybackHelper();
 		if (m_playbackHelper == null) {
 			if (udn.equals(LibreApplication.LOCAL_UDN)) return;
@@ -404,13 +407,13 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.source:
-			if(!AppPreference.HideDMRList())
-			{
-				startActivity(new Intent(this, DMRActivity.class));
-				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-			}
-			break;
+				case R.id.source:
+					if(!AppPreference.HideDMRList())
+					{
+						startActivity(new Intent(this, DMRActivity.class));
+						overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+					}
+					break;
 			
 	/*	case R.id.setting:
 			startActivity(new Intent(this, SettingsActivity.class));
