@@ -87,10 +87,7 @@ public class DMRActivity extends BaseActivity {
 		back.setOnClickListener(new OnClickListener() {		
 			@Override
 			public void onClick(View v) {
-				
-				
-				startActivity(new Intent(DMRActivity.this,
-						MainActivity.class));
+				//startActivity(new Intent(DMRActivity.this,MainActivity.class));	// yhcha
 				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 				finish();
 			}

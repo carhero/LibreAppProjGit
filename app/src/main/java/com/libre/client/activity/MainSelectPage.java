@@ -298,9 +298,9 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 	} ;
 
 	Integer[] imageId = {
-			R.drawable.ic_pause_black_24dp,
-			R.drawable.anam_logo_full_ima,
-			R.drawable.ic_play_orange_36dp,
+			R.drawable.itunesicon300x300,
+			R.drawable.music_player,
+			R.drawable.book_list,
 	};
 
 	@Override
@@ -324,18 +324,28 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 				switch (position)
 				{
-					case 0:	// Media source
-						startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
-						overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-						break;
-
-					case 1:	// Media Player
-						Intent mediaPlayer  = new Intent(MainSelectPage.this, MainActivity.class);
-						startActivity(mediaPlayer);
-						break;
-					case 2:	// Song List
+					case 0:	// Song List
 						startActivity(new Intent(MainSelectPage.this, DMSListActivity.class));
 						overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+						break;
+
+					case 1:	// Select Media Player
+                        startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
+                        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+						break;
+
+					case 2:	// Browse and play media
+                        //RemoteDevice device = m_adapter.getItem(position);
+                        //m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
+                        Constant.isUpNPbroswer=true;
+
+                        Intent intent = new Intent(MainSelectPage.this, DMSBrowserActivity.class);
+                        //MainSelectPage.this.startActivity(intent);
+                        startActivity(intent);
+
+                        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+						//startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
+
 						break;
 
 					default:

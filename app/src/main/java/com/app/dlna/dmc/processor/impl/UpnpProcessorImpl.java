@@ -127,7 +127,7 @@ public class UpnpProcessorImpl implements UpnpProcessor, RegistryListener {
 	}
 
 	public ControlPoint getControlPoint() {
-		return m_upnpService.getControlPoint();
+		return m_upnpService.getControlPoint();	//yhcha, DMR 선택 시 여기에서 문제 발생함.
 	}
 
 	@Override

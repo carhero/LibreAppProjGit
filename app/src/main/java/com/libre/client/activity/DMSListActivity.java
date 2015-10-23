@@ -181,14 +181,14 @@ public class DMSListActivity extends UpnpListenerActivity {
 	private OnItemClickListener itemClickListener = new OnItemClickListener() {
 
 		public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
-			RemoteDevice device = m_adapter.getItem(position);
+			// yhcha, MainSelectPage에서 Song List 를 Browse 하기 위해서
+			/*RemoteDevice device = m_adapter.getItem(position);
 //			((ClintApplication)getApplication()).setMusicUdn(device.getIdentity().getUdn().toString());
-			m_myApp.setDmsBrowseHelperTemp(
-					new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
+			m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
             Constant.isUpNPbroswer=true;
 			
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
-			DMSListActivity.this.startActivity(intent);
+			DMSListActivity.this.startActivity(intent);*/
 
 			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		}

@@ -49,7 +49,7 @@ import org.fourthline.cling.model.types.ServiceType;
 
 import java.util.Iterator;
 
-public class MainActivity extends BaseActivity implements DMRProcessorListener {
+public class NowPlayingActivity extends BaseActivity implements DMRProcessorListener {
 	private static final int MSG_REG_BROADCAST = 0x01;
 	private static final int MSG_DMR_UPDATEPOSITION = 0xA0;
 	private static final int MSG_DMR_PLAYCOMPLETED = 0xA1;
@@ -80,16 +80,16 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	private TextView m_singer;
 	private TextView m_song;
 	private ImageView m_songimg;
-	
+
 	private ImageView m_source;
 	private TextView m_speakername;
 	private AudioManager m_audioManager;
-	
+
 	private SeekBar m_sb_playingProgress;
 	private MySlider m_sb_volume;
 	private ImageButton m_btn_PlayPause;
 	private ImageButton m_volumePlus;
-	
+
 	private boolean restartneeded=false;
 
 	private PLAY_STATE m_currentPlayState = PLAY_STATE.STOP;
@@ -98,14 +98,14 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		PLAYING,
 		STOP
 	}
-	
-	
+
+
 	WifiConnect connect;
 	int attempts=0;
 	private ProgressDialog m_progressDlg;
 	protected int OOH_CONNECT_FAILED=0x30;
 	protected int OOH_CONNECT_SUCCESS=0x31;
-	
+
 	@Override
 	protected void loadViewLayout() {
 		this.setContentView(R.layout.main);
@@ -143,38 +143,38 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		m_previous.setOnClickListener(this);
 		m_sb_playingProgress.setOnSeekBarChangeListener(playbackSeekListener);
 		m_sb_volume.setOnSeekBarChangeListener(volumeSeekListener);
-		
-		
+
+
 		m_btn_PlayPause.setOnClickListener(playPauseListener);
 		m_btn_PlayPause.setOnTouchListener(new OnTouchListener() {
-			
+
 			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					switch (m_currentPlayState) {
-					case PAUSE:
-                        v.setBackgroundResource(R.drawable.play2);
+						case PAUSE:
+							v.setBackgroundResource(R.drawable.play2);
 
-                        break;
-					case STOP:
-						v.setBackgroundResource(R.drawable.play2);
-						break;
-					case PLAYING:
-						v.setBackgroundResource(R.drawable.pause2);
-						break;
+							break;
+						case STOP:
+							v.setBackgroundResource(R.drawable.play2);
+							break;
+						case PLAYING:
+							v.setBackgroundResource(R.drawable.pause2);
+							break;
 					}
 				} else if (event.getAction() == MotionEvent.ACTION_UP) {
 					switch (m_currentPlayState) {
-					case PAUSE:
-                        v.setBackgroundResource(R.drawable.pause);
-					case STOP:
-						v.setBackgroundResource(R.drawable.play);
-						break;
-					case PLAYING:
-						v.setBackgroundResource(R.drawable.play);
-						break;
+						case PAUSE:
+							v.setBackgroundResource(R.drawable.pause);
+						case STOP:
+							v.setBackgroundResource(R.drawable.play);
+							break;
+						case PLAYING:
+							v.setBackgroundResource(R.drawable.play);
+							break;
 					}
 				}
 				return false;
@@ -182,16 +182,16 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		});
 		m_volumePlus.setOnClickListener(volumePlusTextListener);
 		//PlaybackHelper.MAIN_CONTEXT.registerReceiver(m_networkReceiver=new BroadcastReceiver())
-	/*	m_networkReceiver = new NetworkStateReceiver(new NwStateListener() {							
+	/*	m_networkReceiver = new NetworkStateReceiver(new NwStateListener() {
 			@Override
 			public void onNetworkChanged(NetworkInterface ni) {
 				Log.v(TAG,"--Network has changed ...Do something");
 			}
 
 			});*/
-		
+
 		Log.d(TAG, "Volume +");
-		
+
 	}
 
 	@Override
@@ -202,16 +202,16 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		imgParams.height = m_myApp.getImageViewSize();
 		m_songimg.setLayoutParams(imgParams);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		m_upnpProcessor = new UpnpProcessorImpl(MainActivity.this);
+		m_upnpProcessor = new UpnpProcessorImpl(NowPlayingActivity.this);
 		m_upnpProcessor.bindUpnpService();
 		m_upnpProcessor.addListener(UpnpDeviceManager.getInstance());
 
-		AppPreference.PREF = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+		AppPreference.PREF = PreferenceManager.getDefaultSharedPreferences(NowPlayingActivity.this);
 
 		NetworkStateReceiver.registerforNetchange(wifihandler);
 
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle paramBundle) {
 
@@ -225,17 +225,17 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	protected void onResume() {
 		super.onResume();
         Log.d(TAG,"OnResume");
-		
+
 		if(restartneeded)
 		{
 			restartneeded=false;
 			//finish();
 			//System.exit(1);
-		
+
 		//	finish();
 		//	startActivity(new Intent(this, LodingActivity.class));
 		}
-		m_upnpProcessor.addListener(MainActivity.this);
+		m_upnpProcessor.addListener(NowPlayingActivity.this);
 		String udn = m_myApp.getCurrentDmrDeviceUdn();
 		if (udn == null || udn == "")
 		{
@@ -250,7 +250,7 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 			RemoteService service = deviceMeta.findService(new ServiceType(DMRControlHelper.SERVICE_NAMESPACE,
 					DMRControlHelper.SERVICE_AVTRANSPORT_TYPE));
 			if (service == null) return;
-			DMRControlHelper dmrControl = new DMRControlHelper(udn, 
+			DMRControlHelper dmrControl = new DMRControlHelper(udn,
 					m_upnpProcessor.getControlPoint(), deviceMeta, service);
 			m_playbackHelper = new PlaybackHelper(dmrControl);
 			LibreApplication.PLAYBACK_HELPER_MAP.put(udn, m_playbackHelper);
@@ -258,11 +258,11 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		m_dmrControlHelper = m_playbackHelper.getDmrHelper();
 		m_dmrProcessor = m_dmrControlHelper.getDmrProcessor();
 
-		m_dmrProcessor.addListener(MainActivity.this);
+		m_dmrProcessor.addListener(NowPlayingActivity.this);
 		m_myApp.setDmsBrowseHelperSaved(m_playbackHelper.getDmsHelper());
-		
-		
-	
+
+
+
 		handleUI();
 
 		if (m_myApp.isPlayNewSong()) {
@@ -279,19 +279,19 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 				setPlayStopStatus();
 			}
 		}
-		
+
 	}
-	
+
 	private void handleUI() {
-	
+
 		resetPlayBackScreen();
-		
+
 		if (m_dmrControlHelper.isLocalDevice()) {
 			m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
 			m_sb_volume.setProgress(m_dmrProcessor.getVolume());
 		//	m_speakername.setText(m_dmrControlHelper.getDmrDisplayName());
-		
-			
+
+
 		}
 		else
 		{
@@ -302,10 +302,10 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 			m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
 			m_sb_volume.setProgress(m_dmrProcessor.getVolume());
 			m_speakername.setText(m_myApp.getSpeakerName());
-			
-			
+
+
 		}
-		
+
 		handler.sendEmptyMessage(0x01);
 	}
 
@@ -321,9 +321,9 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 		setPlayStopStatus();
 	}
 
-	
+
 	@Override
-	public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		boolean isVolumeChange = false;
 		switch (keyCode) {
 			case KeyEvent.KEYCODE_VOLUME_DOWN:
@@ -358,10 +358,10 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	protected void onPause() {
 		super.onPause();
 		if (m_dmrProcessor != null) {
-			m_dmrProcessor.removeListener(MainActivity.this);
+			m_dmrProcessor.removeListener(NowPlayingActivity.this);
 		}
 		if (m_upnpProcessor != null) {
-			m_upnpProcessor.removeListener(MainActivity.this);
+			m_upnpProcessor.removeListener(NowPlayingActivity.this);
 		}
 	}
 
@@ -569,15 +569,15 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 			switch (m_currentPlayState) {
 				case PAUSE:
                     m_dmrProcessor.play();
-                    m_currentPlayState=PLAY_STATE.PLAYING;
+                    m_currentPlayState= PLAY_STATE.PLAYING;
                     break;
 				case STOP:
 					m_dmrProcessor.play();
-                    m_currentPlayState=PLAY_STATE.PLAYING;
+                    m_currentPlayState= PLAY_STATE.PLAYING;
 					break;
 				case PLAYING:
 					m_dmrProcessor.pause();
-                    m_currentPlayState=PLAY_STATE.PAUSE;
+                    m_currentPlayState= PLAY_STATE.PAUSE;
 
 					break;
 				default:
@@ -885,7 +885,7 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	private void DisplayAlert(String msg){
 
 		final AlertDialog alertDialog1 = new AlertDialog.Builder(
-				MainActivity.this).create();
+				NowPlayingActivity.this).create();
 
 		// Setting Dialog Title
 		alertDialog1.setTitle("Alert");
@@ -905,7 +905,7 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 				// i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				//startActivity(i);
 
-				Intent mainIntent = new Intent(MainActivity.this, LodingActivity.class);
+				Intent mainIntent = new Intent(NowPlayingActivity.this, LodingActivity.class);
 				mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
 				startActivity(mainIntent);
 				finish();
