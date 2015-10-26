@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.app.dlna.dmc.gui.abstractactivity.UpnpListenerActivity;
 import com.app.dlna.dmc.processor.impl.UpnpProcessorImpl;
 import com.app.dlna.dmc.processor.interfaces.UpnpProcessor;
-import com.libre.client.util.DMSBrowseHelper;
 import com.libre.client.util.NetUiUtils;
 import com.libre.client.util.UpnpDeviceManager;
 
@@ -119,16 +118,29 @@ public class DMSListActivity extends UpnpListenerActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+
+			/*	yhcha modified
 //			m_myApp.setMusicUdn(m_myApp.getLocalDeviceUdn());
-			m_myApp.setDmsBrowseHelperTemp(
-					new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
+			m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
 
             //Log.d("DMSListActivity", "My device clicked");
 
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
 			startActivity(intent);
             Constant.isUpNPbroswer=false;
-			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);*/
+
+			Intent intent = new Intent(DMSListActivity.this, MainSelectPage.class);
+			intent.putExtra("SongListName", "MyLocalDevice");
+
+			/*startActivity(intent);
+			finish();
+			overridePendingTransition(R.anim.out_to_left, R.anim.in_from_right);*/
+			//startActivity(intent);
+
+			finish();
+			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+			startActivity(intent);
 		}
 	};
 

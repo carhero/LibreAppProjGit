@@ -70,7 +70,7 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.dmsbrowser_activity);
 
-		getSupportActionBar().hide();
+		getSupportActionBar().hide();	//yhcha
 
 		m_myApp = (LibreApplication)getApplication();
 		m_operatingAnim = AnimationUtils.loadAnimation(this, R.anim.btnani);
@@ -117,6 +117,26 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		});
 		
 		m_textHeadLine = (TextView) findViewById(R.id.choosesong);
+
+		// yhcha Local Music browse mode option
+		// 1. load saved DMS info
+		Intent intent = getIntent();
+		String dmsname = intent.getStringExtra("SongListName");
+
+		if("MyLocalDevice".equals(dmsname))
+		{
+			Constant.isUpNPbroswer=false;
+			m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
+			Toast.makeText(getApplicationContext(), "MyLocalDevice true",Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			Toast.makeText(getApplicationContext(), intent.getStringExtra("SongListName") ,Toast.LENGTH_LONG).show();
+		}
+
+		//Log.d("DMSListActivity", "My device clicked");
+
+
 	}
 
 	@Override
@@ -274,7 +294,7 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 
 									@Override
 									public void onClick(DialogInterface dialog,
-											int which) {
+														int which) {
 										//TODO act failed
 										onBackPressed();
 									}
@@ -289,12 +309,14 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		if (m_browseObjectStack.isEmpty() || m_browseObjectStack.peek().getId().equals(ContentTree.ROOT_ID)) {
 			finish();
 			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+			//Toast.makeText(getApplicationContext(), "onBackPressed-finish", Toast.LENGTH_LONG).show();
 //			super.onBackPressed();
 		} else {
 			m_browseObjectStack.pop();
 			if (!m_browseObjectStack.isEmpty()) {
 				browse(m_browseObjectStack.peek());
 			}
+			//Toast.makeText(getApplicationContext(), "onBackPressed-m_browseObjectStack.pop", Toast.LENGTH_LONG).show();
 		}
 	}
 

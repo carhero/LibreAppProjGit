@@ -288,8 +288,8 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 	} ;
 
 	String[] Source = {
-			"Waiting for ",
-			"Waiting for ",
+			"",
+			"",
 			"There are your songs, photos and videos",
 	} ;
 
@@ -339,7 +339,9 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
                         //m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
                         Constant.isUpNPbroswer=true;
 
+						Intent getValue = getIntent();
                         Intent intent = new Intent(MainSelectPage.this, DMSBrowserActivity.class);
+						intent.putExtra("SongListName", getValue.getStringExtra("SongListName"));
                         //MainSelectPage.this.startActivity(intent);
                         startActivity(intent);
 
@@ -367,7 +369,6 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 		listView.refreshDrawableState();
 
 		Log.d(TAG, "UpdateUI" + "Title[0] = " + Title[0] + getValue.getStringExtra("SongListName") + getValue.getIntExtra("SongListNumber",100));
-
 
 		if(restartneeded)
 		{
@@ -403,8 +404,6 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 		m_dmrProcessor.addListener(MainSelectPage.this);
 		m_myApp.setDmsBrowseHelperSaved(m_playbackHelper.getDmsHelper());
-
-
 
 		handleUI();
 
