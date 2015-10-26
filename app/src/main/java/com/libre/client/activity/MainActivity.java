@@ -109,7 +109,6 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	@Override
 	protected void loadViewLayout() {
 		this.setContentView(R.layout.main);
-
 	}
 
 	@Override

@@ -223,11 +223,11 @@
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
     <!-- From: file:/D:/Project/AndroidProject/LibreAppProjGit/app/src/main/res/values/dimension.xml -->
     <eat-comment/>
-    <dimen ns1:id="@+id/listItemMarginTop" name="listItemMarginTop">5dp</dimen>
-    <dimen ns1:id="@+id/norBtnSize" name="norBtnSize">40dp</dimen>
-    <dimen ns1:id="@+id/norEdgeMargin" name="norEdgeMargin">20dp</dimen>
-    <dimen ns1:id="@+id/titleHeight" name="titleHeight">50dp</dimen>
-    <dimen ns1:id="@+id/titleLogoHeight" name="titleLogoHeight">30dp</dimen>
+    <dimen name="listItemMarginTop" ns1:id="@+id/listItemMarginTop">5dp</dimen>
+    <dimen name="norBtnSize" ns1:id="@+id/norBtnSize">40dp</dimen>
+    <dimen name="norEdgeMargin" ns1:id="@+id/norEdgeMargin">20dp</dimen>
+    <dimen name="titleHeight" ns1:id="@+id/titleHeight">50dp</dimen>
+    <dimen name="titleLogoHeight" ns1:id="@+id/titleLogoHeight">30dp</dimen>
     <!-- From: file:/D:/Project/AndroidProject/LibreAppProjGit/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
@@ -268,7 +268,7 @@
     <string name="action_ddms_refresh">Refresh DDMS nodes</string>
     <string name="action_freeall">Free All Nodes</string>
     <string name="action_joinall">Join All </string>
-    <string name="app_name">SA200</string>
+    <string name="app_name">My SA200</string>
     <string name="app_version">App Version:1.0</string>
     <string name="bass">Bass:</string>
     <string name="choosename">Choose a new name for your Asgard speaker</string>

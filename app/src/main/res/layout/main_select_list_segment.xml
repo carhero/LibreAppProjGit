@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#FF778855" >
+    android:background="#FFFFFFFF" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,9 +35,10 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:src="@drawable/anam_logo_full_ima"
-            android:id="@+id/imgDescription" />
+            android:id="@+id/imgDescription"
+            android:layout_gravity="left" />
     </LinearLayout>
 
 </LinearLayout>

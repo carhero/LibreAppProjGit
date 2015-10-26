@@ -271,11 +271,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 	protected int OOH_CONNECT_FAILED=0x30;
 	protected int OOH_CONNECT_SUCCESS=0x31;
 
-
-
-
-
-
+	MainSelectListSeg adapter;
 	private ListView listView;
 	private ArrayList<MainSelectListSeg> arrayList;
 	//ListView list;
@@ -307,10 +303,14 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 	protected void onCreate(Bundle paramBundle) {
 		super.onCreate(paramBundle);
 		getSupportActionBar().hide();
+		Log.d(TAG, "onCreate");
 		//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main_select_page);
 
-		MainSelectListSeg adapter = new MainSelectListSeg(MainSelectPage.this, Number, Title, Source, imageId);
+		/*Intent getValue = getIntent();
+		Source[0] = getValue.getStringExtra("SongListName");*/
+
+		adapter = new MainSelectListSeg(MainSelectPage.this, Number, Title, Source, imageId);
 
 		listView = (ListView) findViewById(R.id.listView);
 		listView.setAdapter(adapter);
@@ -331,7 +331,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 					case 1:	// Select Media Player
                         startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
-                        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+						overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 						break;
 
 					case 2:	// Browse and play media
@@ -343,7 +343,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
                         //MainSelectPage.this.startActivity(intent);
                         startActivity(intent);
 
-                        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+						overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 						//startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
 
 						break;
@@ -359,6 +359,15 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG,"OnResume");
+
+		Intent getValue = getIntent();
+		Source[0] = getValue.getStringExtra("SongListName");
+		MainSelectListSeg newAdapter = new MainSelectListSeg(MainSelectPage.this, Number, Title, Source, imageId);
+		listView.setAdapter(newAdapter);
+		listView.refreshDrawableState();
+
+		Log.d(TAG, "UpdateUI" + "Title[0] = " + Title[0] + getValue.getStringExtra("SongListName") + getValue.getIntExtra("SongListNumber",100));
+
 
 		if(restartneeded)
 		{
@@ -424,8 +433,6 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 			/*m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
 			m_sb_volume.setProgress(m_dmrProcessor.getVolume());*/
 			//	m_speakername.setText(m_dmrControlHelper.getDmrDisplayName());
-
-
 		}
 		else
 		{
@@ -436,11 +443,10 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 			/*m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
 			m_sb_volume.setProgress(m_dmrProcessor.getVolume());
 			m_speakername.setText(m_myApp.getSpeakerName());*/
-
-
 		}
-
 		//handler.sendEmptyMessage(0x01);
+
+		// Refresh DMS Name	by yhcha
 	}
 
 	public MainSelectPage() {

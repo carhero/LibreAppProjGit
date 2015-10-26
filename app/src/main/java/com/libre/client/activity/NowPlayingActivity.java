@@ -108,7 +108,7 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
 
 	@Override
 	protected void loadViewLayout() {
-		this.setContentView(R.layout.main);
+		this.setContentView(R.layout.now_playing_activity);
 
 	}
 
@@ -218,6 +218,7 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
         super.onCreate(paramBundle);
         Log.d(TAG,"OnCreate");
         PlaybackHelper.MAIN_CONTEXT = this;
+		getSupportActionBar().hide();	//yhcha
 	}
 
 

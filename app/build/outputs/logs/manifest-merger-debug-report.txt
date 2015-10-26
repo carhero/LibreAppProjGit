@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:1:1-74:12
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:1:1-79:12
 	xmlns:android
 		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:1:11-69
 	package
@@ -67,7 +67,7 @@ ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifes
 	android:name
 		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:18:22-78
 application
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:21:5-70:19
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:21:5-75:19
 MERGED from [com.android.support:support-v4:21.0.3] D:\Project\AndroidProject\LibreAppProjGit\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\AndroidManifest.xml:16:5-19
 MERGED from [com.android.support:appcompat-v7:21.0.3] D:\Project\AndroidProject\LibreAppProjGit\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\AndroidManifest.xml:16:5-19
 MERGED from [com.android.support:support-v4:21.0.3] D:\Project\AndroidProject\LibreAppProjGit\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\AndroidManifest.xml:16:5-19
@@ -157,24 +157,30 @@ ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifes
 		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:59:13-45
 	android:name
 		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:58:13-68
+activity#com.libre.client.activity.NowPlayingActivity
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:62:9-65:20
+	android:label
+		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:64:13-45
+	android:name
+		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:63:13-72
 service#com.app.dlna.dmc.processor.upnp.CoreUpnpService
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:62:9-83
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:67:9-83
 	android:name
-		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:62:18-80
+		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:67:18-80
 receiver#com.libre.client.activity.NetworkStateReceiver
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:63:9-68:12
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:68:9-73:12
 	android:name
-		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:63:19-55
+		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:68:19-55
 intent-filter#android.net.conn.CONNECTIVITY_CHANGE+android.net.wifi.WIFI_STATE_CHANGED
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:64:5-67:21
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:69:5-72:21
 action#android.net.conn.CONNECTIVITY_CHANGE
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:65:8-70
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:70:8-70
 	android:name
-		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:65:16-67
+		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:70:16-67
 action#android.net.wifi.WIFI_STATE_CHANGED
-ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:66:8-69
+ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:71:8-69
 	android:name
-		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:66:16-66
+		ADDED from D:\Project\AndroidProject\LibreAppProjGit\app\src\main\AndroidManifest.xml:71:16-66
 activity#android.support.v7.widget.TestActivity
 ADDED from [com.android.support:recyclerview-v7:21.0.3] D:\Project\AndroidProject\LibreAppProjGit\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.3\AndroidManifest.xml:18:9-115
 	android:label

@@ -43,7 +43,7 @@ public class MainSelectListSeg extends ArrayAdapter<String> {
 
         textNumber.setText(saNum[position]);
         textDescription.setText(saTitle[position]);
-        textSourceName.setText(saTitle[position]);
+        textSourceName.setText(saSource[position]);
         imgDescription.setImageResource(imageId[position]);
 
 //        textNumber.setTextSize(30);

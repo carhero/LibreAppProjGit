@@ -15,7 +15,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -154,7 +153,7 @@ public class LodingActivity extends BaseActivity {
 
 
         //Remove notification bar
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);	// yhcha, block
 
 	   //set content view AFTER ABOVE sequence (to avoid crash)
 	    

@@ -67,9 +67,8 @@ public class DMRActivity extends BaseActivity {
 		m_mydevice=(TextView) findViewById(R.id.mydevice);
 		m_mydevice.setText(LibreApplication.MY_MODEL);
 		
-		 back=(ImageButton) findViewById(R.id.advance);
-		
-		
+		//back=(ImageButton) findViewById(R.id.advance);	// yhcha change back button image icon
+		back=(ImageButton) findViewById(R.id.back);			// yhcha
 	}
 
 	@Override

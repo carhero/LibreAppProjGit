@@ -190,7 +190,16 @@ public class DMSListActivity extends UpnpListenerActivity {
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
 			DMSListActivity.this.startActivity(intent);*/
 
-			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+			String dmsName = m_adapter.getItem(position).getDetails().getFriendlyName();	// yhcha get frinely name
+			Intent intent = new Intent(DMSListActivity.this, MainSelectPage.class);
+
+			intent.putExtra("SongListNumber", position);
+			intent.putExtra("SongListName", dmsName);
+			Log.d("DMSListActivity", "Selected DMS Num : " + position + ", Name : " + dmsName);
+
+			finish();
+			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+			startActivity(intent);	// StartActivity 로 Intect object를 넘겨줘야만 putExtra 값이 Save된다.
 		}
 	};
 

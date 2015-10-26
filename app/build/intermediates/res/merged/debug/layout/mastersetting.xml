@@ -26,6 +26,15 @@
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/norEdgeMargin"
             android:background="@drawable/nowplaying" />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="@dimen/norBtnSize"
+            android:layout_height="@dimen/norBtnSize"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/norEdgeMargin"
+            android:background="@drawable/back" />
     </RelativeLayout>
 
     <TextView

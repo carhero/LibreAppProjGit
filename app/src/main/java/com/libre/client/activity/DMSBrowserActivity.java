@@ -64,9 +64,14 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		Log.d(TAG, "onCreate");
+
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.dmsbrowser_activity);
-		
+
+		getSupportActionBar().hide();
+
 		m_myApp = (LibreApplication)getApplication();
 		m_operatingAnim = AnimationUtils.loadAnimation(this, R.anim.btnani);
 		LinearInterpolator lin = new LinearInterpolator();
@@ -97,10 +102,17 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(DMSBrowserActivity.this, MainActivity.class);
+				// Changed to New Nowplaying pages
+				/*Intent intent = new Intent(DMSBrowserActivity.this, MainActivity.class);
+				startActivity(intent);
+				finish();
+				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);*/
+
+				Intent intent = new Intent(DMSBrowserActivity.this, NowPlayingActivity.class);
 				startActivity(intent);
 				finish();
 				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+
 			}
 		});
 		
@@ -112,6 +124,8 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		super.onResume();
 		if (m_upnpProcessor != null)
 			m_upnpProcessor.addListener(this);
+
+		Log.d(TAG, "onResume");
 	}
 
 	@Override
@@ -120,6 +134,8 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		if (m_upnpProcessor != null) {
 			m_upnpProcessor.removeListener(this);
 		}
+
+		Log.d(TAG, "onPause");
 	}
 
 	@Override
@@ -127,6 +143,8 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		super.onDestroy();
 		if (m_upnpProcessor != null)
 			m_upnpProcessor.unbindUpnpService();
+
+		Log.d(TAG, "onPause");
 	}
 
 	private OnItemClickListener itemClickListener = new OnItemClickListener() {
@@ -171,7 +189,9 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		} catch (Throwable t) {
 			m_progressDlg.dismiss();
 			Toast.makeText(this, "Browse content failed!", Toast.LENGTH_SHORT).show();
-		}		
+		}
+
+		Log.d(TAG, "browse");
 	}
 	
 
@@ -187,9 +207,11 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		if (m_myApp.getCurrentPlaybackHelper() != null) {
 			m_myApp.getCurrentPlaybackHelper().setDmsHelper(m_browseHelper.clone());
 		}
-		Intent intent = new Intent(this, MainActivity.class);
-
+		//Intent intent = new Intent(this, MainActivity.class);	//yhcha, changed now playing pages
+		Intent intent = new Intent(this, NowPlayingActivity.class);	//yhcha, changed now playing pages
 		startActivity(intent);
+
+		Log.d(TAG, "play");
 	}
 
 	@Override
@@ -302,6 +324,7 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 			}
 		}
 
+		Log.d(TAG, "onStartComplete");
 	}
 
 }
