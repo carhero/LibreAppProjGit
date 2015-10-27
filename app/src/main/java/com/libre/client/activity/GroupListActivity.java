@@ -36,7 +36,6 @@ import org.fourthline.cling.model.meta.RemoteDevice;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -373,7 +372,6 @@ public class GroupListActivity extends BaseActivity {
         devList.add(new DMRDev(ip,uuid,name));
 
         dmrRefresh();
-
 
     }
     public synchronized void onRemoteDeviceRemoved(RemoteDevice device)

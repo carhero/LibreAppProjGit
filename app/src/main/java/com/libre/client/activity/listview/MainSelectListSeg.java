@@ -21,6 +21,11 @@ public class MainSelectListSeg extends ArrayAdapter<String> {
     private final String[] saSource;
     private final Integer[] imageId;
 
+    TextView textNumber;
+    TextView textDescription;
+    TextView textSourceName;
+    ImageView imgDescription;
+
     public MainSelectListSeg(Activity context, String[] num ,String[] title, String[] source, Integer[] imageId) {
         super(context, R.layout.main_select_list_segment, num);
         this.context = context;
@@ -36,10 +41,10 @@ public class MainSelectListSeg extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.main_select_list_segment, null, true);
 
-        TextView textNumber = (TextView) rowView.findViewById(R.id.textNumber);
-        TextView textDescription = (TextView) rowView.findViewById(R.id.textDescription);
-        TextView textSourceName = (TextView) rowView.findViewById(R.id.textSourceName);
-        ImageView imgDescription = (ImageView) rowView.findViewById(R.id.imgDescription);
+        textNumber = (TextView) rowView.findViewById(R.id.textNumber);
+        textDescription = (TextView) rowView.findViewById(R.id.textDescription);
+        textSourceName = (TextView) rowView.findViewById(R.id.textSourceName);
+        imgDescription = (ImageView) rowView.findViewById(R.id.imgDescription);
 
         textNumber.setText(saNum[position]);
         textDescription.setText(saTitle[position]);
@@ -49,5 +54,10 @@ public class MainSelectListSeg extends ArrayAdapter<String> {
 //        textNumber.setTextSize(30);
 
         return rowView;
+    }
+
+    public TextView getTextSourceNameAtindex()
+    {
+        return textSourceName;
     }
 }

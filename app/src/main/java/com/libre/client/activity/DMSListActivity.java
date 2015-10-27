@@ -129,9 +129,13 @@ public class DMSListActivity extends UpnpListenerActivity {
 			startActivity(intent);
             Constant.isUpNPbroswer=false;
 			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);*/
+			Intent getValue = getIntent();
 
 			Intent intent = new Intent(DMSListActivity.this, MainSelectPage.class);
 			intent.putExtra("SongListName", "MyLocalDevice");
+
+			intent.putExtra("PlayerName", getValue.getStringExtra("PlayerName"));	// save current selected device name
+			intent.putExtra("PlayerUuid", getValue.getStringExtra("PlayerUuid"));	// save current selected uuid number
 
 			/*startActivity(intent);
 			finish();
@@ -202,11 +206,17 @@ public class DMSListActivity extends UpnpListenerActivity {
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
 			DMSListActivity.this.startActivity(intent);*/
 
+			Intent getValue = getIntent();
+
 			String dmsName = m_adapter.getItem(position).getDetails().getFriendlyName();	// yhcha get frinely name
 			Intent intent = new Intent(DMSListActivity.this, MainSelectPage.class);
 
 			intent.putExtra("SongListNumber", position);
 			intent.putExtra("SongListName", dmsName);
+
+			intent.putExtra("PlayerName", getValue.getStringExtra("PlayerName"));	// save current selected device name
+			intent.putExtra("PlayerUuid", getValue.getStringExtra("PlayerUuid"));	// save current selected uuid number
+
 			Log.d("DMSListActivity", "Selected DMS Num : " + position + ", Name : " + dmsName);
 
 			finish();

@@ -61,7 +61,7 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
     private static final int MSG_ONACTIONVOLUME=0xA7;
 
 
-	private static final String TAG = "PLAY VIEW";
+	private static final String TAG = NowPlayingActivity.class.getName();
 	private LibreApplication m_myApp;
 	private long m_waitTime = 2000;
 	private long m_lastBackTime = 0;
@@ -238,9 +238,13 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
 		}
 		m_upnpProcessor.addListener(NowPlayingActivity.this);
 		String udn = m_myApp.getCurrentDmrDeviceUdn();
+
+		Log.d(TAG, "udn name is:" + m_myApp.getCurrentDmrDeviceUdn());
+
+
 		if (udn == null || udn == "")
 		{
-			Log.d("Main Activity", "Null Error!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			Log.d(TAG, "udn is NULL!!!!!!!!!!");
 			return;
 		}
 		m_playbackHelper = m_myApp.getCurrentPlaybackHelper();

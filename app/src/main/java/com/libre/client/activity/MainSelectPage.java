@@ -33,9 +33,6 @@ import com.libre.constants.WIFICONST;
 
 import org.fourthline.cling.model.message.UpnpResponse;
 import org.fourthline.cling.model.meta.Action;
-import org.fourthline.cling.model.meta.RemoteDevice;
-import org.fourthline.cling.model.meta.RemoteService;
-import org.fourthline.cling.model.types.ServiceType;
 
 import java.util.ArrayList;
 
@@ -322,15 +319,27 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 				//finish();
 
+				Intent getValue = getIntent();
+
 				switch (position)
 				{
 					case 0:	// Song List
-						startActivity(new Intent(MainSelectPage.this, DMSListActivity.class));
+						//startActivity(new Intent(MainSelectPage.this, DMSListActivity.class));
+						Intent intent0 = new Intent(MainSelectPage.this, DMSListActivity.class);
+						intent0.putExtra("SongListName", getValue.getStringExtra("SongListName"));
+
+						intent0.putExtra("PlayerName", getValue.getStringExtra("PlayerName"));	// save current selected device name
+						intent0.putExtra("PlayerUuid", getValue.getStringExtra("PlayerUuid"));	// save current selected uuid number
+
+						startActivity(intent0);
 						overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 						break;
 
 					case 1:	// Select Media Player
-                        startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
+                        //startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
+						Intent intent1 = new Intent(MainSelectPage.this, DMRActivity.class);
+						intent1.putExtra("SongListName", getValue.getStringExtra("SongListName"));
+						startActivity(intent1);
 						overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 						break;
 
@@ -339,11 +348,11 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
                         //m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
                         Constant.isUpNPbroswer=true;
 
-						Intent getValue = getIntent();
-                        Intent intent = new Intent(MainSelectPage.this, DMSBrowserActivity.class);
-						intent.putExtra("SongListName", getValue.getStringExtra("SongListName"));
+						//Intent getValue = getIntent();
+                        Intent intent2 = new Intent(MainSelectPage.this, DMSBrowserActivity.class);
+						intent2.putExtra("SongListName", getValue.getStringExtra("SongListName"));
                         //MainSelectPage.this.startActivity(intent);
-                        startActivity(intent);
+                        startActivity(intent2);
 
 						overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 						//startActivity(new Intent(MainSelectPage.this, DMRActivity.class));
@@ -364,9 +373,16 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 		Intent getValue = getIntent();
 		Source[0] = getValue.getStringExtra("SongListName");
+		Source[1] = getValue.getStringExtra("PlayerName");
+
 		MainSelectListSeg newAdapter = new MainSelectListSeg(MainSelectPage.this, Number, Title, Source, imageId);
 		listView.setAdapter(newAdapter);
 		listView.refreshDrawableState();
+
+		if(Source[0] != null || Source[1] != null )
+		{
+			//adapter.getTextSourceNameAtindex().setTextColor(0xFF0000FF);
+		}
 
 		Log.d(TAG, "UpdateUI" + "Title[0] = " + Title[0] + getValue.getStringExtra("SongListName") + getValue.getIntExtra("SongListNumber",100));
 
@@ -386,7 +402,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 			Log.d("Main Activity", "Null Error!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			return;
 		}
-		m_playbackHelper = m_myApp.getCurrentPlaybackHelper();
+		/*m_playbackHelper = m_myApp.getCurrentPlaybackHelper();
 		if (m_playbackHelper == null) {
 			if (udn.equals(LibreApplication.LOCAL_UDN)) return;
 			RemoteDevice deviceMeta = UpnpDeviceManager.getInstance().getRemoteDmrMap().get(udn);
@@ -421,7 +437,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 				//setPlayStopStatus();
 			}
 		}
-
+*/
 	}
 
 	private void handleUI() {

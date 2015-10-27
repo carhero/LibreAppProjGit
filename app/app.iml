@@ -97,8 +97,8 @@
     <orderEntry type="library" exported="" name="jetty-client-8.1.12.v20130726" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="jetty-servlet-8.1.12.v20130726" level="project" />
     <orderEntry type="library" exported="" name="slf4j-jdk14-1.7.5" level="project" />
+    <orderEntry type="library" exported="" name="jetty-servlet-8.1.12.v20130726" level="project" />
     <orderEntry type="library" exported="" name="palette-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="jetty-io-8.1.12.v20130726" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />

@@ -37,7 +37,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class DMRActivity extends BaseActivity {
-	private final static String TAG = "DMR ACTIVITY";
+	//private final static String TAG = "DMR ACTIVITY";
+	private final static String TAG = DMRActivity.class.getName();
 	private ListView m_listView;
 	private Button m_refresh;
 	private TextView m_mydevice;
@@ -51,12 +52,17 @@ public class DMRActivity extends BaseActivity {
 	protected void loadViewLayout() {
 		setContentView(R.layout.mastersetting);
 		NetUiUtils.canNetWorkOperateInMainThread();
-	}
-		private void StartLSSDPScan() {
-		//m_myApp.getScanThread().addhandler(handler); 
-	     m_myApp.getScanThread().UpdateNodes();
 
-		}
+		Log.d(TAG, "loadViewLayout");
+
+	}
+
+	private void StartLSSDPScan() {
+		//m_myApp.getScanThread().addhandler(handler);
+		m_myApp.getScanThread().UpdateNodes();
+		Log.d(TAG, "loadViewLayout");
+	}
+
 	@Override
 	protected void findViewById() {
 		m_operatingAnim = AnimationUtils.loadAnimation(this, R.anim.btnani);
@@ -77,10 +83,32 @@ public class DMRActivity extends BaseActivity {
 		m_mydevice.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.v(TAG,"m_mydevice onClick");
+				Log.v(TAG, "m_mydevice onClick");
 				m_myApp.setCurrentDmrDeviceUdn(LibreApplication.LOCAL_UDN);
-				startActivity(new Intent(DMRActivity.this, MainActivity.class));
-				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+				// yhcha modify
+				/*startActivity(new Intent(DMRActivity.this, MainActivity.class));
+				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);*/
+
+				// yhcha, DMR 선택 후 List Name을 저장 후 MainSeletPage로 전환한다.
+				Intent getValue = getIntent();
+				Intent intent = new Intent(DMRActivity.this, MainSelectPage.class);
+				// 이전에 Saved된 값을 override한다.
+				intent.putExtra("SongListName", getValue.getStringExtra("SongListName"));	// save current selected device name
+
+				// 새로운 값을 저장한다.
+				intent.putExtra("PlayerName", "Local media player");	// save current selected device name
+				intent.putExtra("PlayerUuid", LibreApplication.LOCAL_UDN);	// save current selected uuid number
+
+				Log.d(TAG, "Current Local DMR udn : " + m_myApp.getCurrentDmrDeviceUdn());
+
+				finish();
+				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+				startActivity(intent);
+
+				/*finish();
+				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);*/
+
 			}
 		});
 		back.setOnClickListener(new OnClickListener() {		
@@ -117,6 +145,7 @@ public class DMRActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(paramBundle);
 		getSupportActionBar().hide();
+		Log.d(TAG, "onCreate");
 	}
 	
 	@Override
@@ -126,12 +155,14 @@ public class DMRActivity extends BaseActivity {
 		//m_refresh.performClick();
 		StartLSSDPScan();
 		super.onResume();
+		Log.d(TAG, "onResume");
 	}
 	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		Log.d(TAG, "onPause");
 	}
 
 	@Override
@@ -268,9 +299,35 @@ public class DMRActivity extends BaseActivity {
 					// TODO Auto-generated method stub
 					DMRActivity masterActivtiy = (DMRActivity)context;
 					DMRDev dev = devView;
-					m_myApp.setCurrentDmrDeviceUdn(dev.getUuid());
+
+					// yhcha modify
+					/*m_myApp.setCurrentDmrDeviceUdn(dev.getUuid());
 					m_myApp.setSpeakerName(dev.getDevName());
-					masterActivtiy.startActivity(new Intent(masterActivtiy, MainActivity.class));
+					masterActivtiy.startActivity(new Intent(masterActivtiy, MainActivity.class));*/
+
+					// yhcha, DMR 선택 후 List Name을 저장 후 MainSeletPage로 전환한다.
+					Intent getValue = getIntent();
+
+					Intent intent = new Intent(DMRActivity.this, MainSelectPage.class);
+
+					// 이전에 Saved된 값을 override한다.
+					intent.putExtra("SongListName", getValue.getStringExtra("SongListName"));	// save current selected device name
+
+					// 새로운 값을 저장한다.
+					intent.putExtra("PlayerName", dev.getDevName());	// save current selected device name
+					intent.putExtra("PlayerUuid", dev.getUuid());	// save current selected uuid number
+
+					m_myApp.setCurrentDmrDeviceUdn(dev.getUuid());
+
+					Log.d(TAG, "Current DMR udn : " + m_myApp.getCurrentDmrDeviceUdn());
+
+					finish();
+					overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+					startActivity(intent);
+
+					/*Toast.makeText(getApplicationContext(), "dev.getDevName()" + dev.getDevName(), Toast.LENGTH_LONG).show();
+					Log.d(TAG, "dev.getDevName() = " + dev.getDevName());*/
+
 //					masterActivtiy.finish();
 				}
 			});
@@ -305,7 +362,8 @@ public class DMRActivity extends BaseActivity {
 		
 	}
 
-	
+
+	// yhcha call되는 곳이 없다.
 	@Override
 	public void onBackPressed() {
 		
@@ -318,8 +376,8 @@ public class DMRActivity extends BaseActivity {
 		if (m_upnpProcessor != null) {
 			m_upnpProcessor.unbindUpnpService();
 		}
-		
-	
+
+		Log.d(TAG, "onDestroy");
 		super.onDestroy();
 	}
 
@@ -394,9 +452,8 @@ public class DMRActivity extends BaseActivity {
 	public void onRemoteDeviceAdded(RemoteDevice device)
 	{
 		Log.d(TAG,"onRemoteDeviceAdded.....");
-
-		
 	}
+
 	public void onRemoteDeviceRemoved(RemoteDevice device)
 	{
 		Log.d(TAG,"onRemoteDeviceRemoved.....");

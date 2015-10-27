@@ -295,7 +295,6 @@ public class ZoneMasterFragment extends Fragment {
                     devcount++;
                     devtext.setText(Integer.toString(devcount));
 
-
                 }
             }
         });
@@ -325,11 +324,6 @@ public class ZoneMasterFragment extends Fragment {
             public void run() {
                 m_myApp.getScanThread().UpdateNodes();
                 adapter.notifyDataSetChanged();
-
-
-
-
-
 
             }
         },200);
@@ -410,8 +404,7 @@ public class ZoneMasterFragment extends Fragment {
         }
     };
 
-
-@Override
+    @Override
     public  void onPause()
     {
         Log.d(TAG, "On Pause ");
@@ -423,7 +416,6 @@ public class ZoneMasterFragment extends Fragment {
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Take appropriate action for each action item click
@@ -433,14 +425,11 @@ public class ZoneMasterFragment extends Fragment {
                     getActivity().finish();
                 return false;
 
-
-
-
-
             default:
                 return false;
         }
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -453,8 +442,6 @@ public class ZoneMasterFragment extends Fragment {
         devtext.setTextSize(14);
         if (AppPreference.ShowZoneCount())
         menu.add(0, 1, 2, "Count").setActionView(devtext).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
-
     }
 
 
