@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	@Override
 	protected void loadViewLayout() {
 		this.setContentView(R.layout.main);
+
 	}
 
 	@Override
@@ -194,7 +195,7 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	}
 
 	@Override
-	 protected void processLogic() {
+	protected void processLogic() {
 		m_myApp = (LibreApplication)getApplication();
 		ViewGroup.LayoutParams imgParams = m_songimg.getLayoutParams();
 		imgParams.width = m_myApp.getImageViewSize();
@@ -406,13 +407,13 @@ public class MainActivity extends BaseActivity implements DMRProcessorListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-				case R.id.source:
-					if(!AppPreference.HideDMRList())
-					{
-						startActivity(new Intent(this, DMRActivity.class));
-						overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-					}
-					break;
+		case R.id.source:
+			if(!AppPreference.HideDMRList())
+			{
+				startActivity(new Intent(this, DMRActivity.class));
+				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+			}
+			break;
 			
 	/*	case R.id.setting:
 			startActivity(new Intent(this, SettingsActivity.class));

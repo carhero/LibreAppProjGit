@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.app.dlna.dmc.gui.abstractactivity.UpnpListenerActivity;
 import com.app.dlna.dmc.processor.impl.UpnpProcessorImpl;
 import com.app.dlna.dmc.processor.interfaces.UpnpProcessor;
+import com.libre.client.util.DMSBrowseHelper;
 import com.libre.client.util.NetUiUtils;
 import com.libre.client.util.UpnpDeviceManager;
 
@@ -118,17 +119,19 @@ public class DMSListActivity extends UpnpListenerActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-
-			/*	yhcha modified
 //			m_myApp.setMusicUdn(m_myApp.getLocalDeviceUdn());
-			m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
-
-            //Log.d("DMSListActivity", "My device clicked");
+			m_myApp.setDmsBrowseHelperTemp(
+					new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
 
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
 			startActivity(intent);
             Constant.isUpNPbroswer=false;
-			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);*/
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+			/*
+			m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(true, LibreApplication.LOCAL_UDN));
+			Constant.isUpNPbroswer=false;
+
 			Intent getValue = getIntent();
 
 			Intent intent = new Intent(DMSListActivity.this, MainSelectPage.class);
@@ -137,14 +140,15 @@ public class DMSListActivity extends UpnpListenerActivity {
 			intent.putExtra("PlayerName", getValue.getStringExtra("PlayerName"));	// save current selected device name
 			intent.putExtra("PlayerUuid", getValue.getStringExtra("PlayerUuid"));	// save current selected uuid number
 
-			/*startActivity(intent);
-			finish();
-			overridePendingTransition(R.anim.out_to_left, R.anim.in_from_right);*/
+			///*startActivity(intent);
+			//finish();
+			//overridePendingTransition(R.anim.out_to_left, R.anim.in_from_right);*/
+			////startActivity(intent);
+
+
+			//overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 			//startActivity(intent);
 
-			finish();
-			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-			startActivity(intent);
 		}
 	};
 
@@ -197,16 +201,17 @@ public class DMSListActivity extends UpnpListenerActivity {
 	private OnItemClickListener itemClickListener = new OnItemClickListener() {
 
 		public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
-			// yhcha, MainSelectPage에서 Song List 를 Browse 하기 위해서
-			/*RemoteDevice device = m_adapter.getItem(position);
+			RemoteDevice device = m_adapter.getItem(position);
 //			((ClintApplication)getApplication()).setMusicUdn(device.getIdentity().getUdn().toString());
-			m_myApp.setDmsBrowseHelperTemp(new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
+			m_myApp.setDmsBrowseHelperTemp(
+					new DMSBrowseHelper(false, device.getIdentity().getUdn().toString()));
             Constant.isUpNPbroswer=true;
 			
 			Intent intent = new Intent(DMSListActivity.this, DMSBrowserActivity.class);
-			DMSListActivity.this.startActivity(intent);*/
-
-			Intent getValue = getIntent();
+			DMSListActivity.this.startActivity(intent);
+			
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+			/*Intent getValue = getIntent();
 
 			String dmsName = m_adapter.getItem(position).getDetails().getFriendlyName();	// yhcha get frinely name
 			Intent intent = new Intent(DMSListActivity.this, MainSelectPage.class);
@@ -221,7 +226,7 @@ public class DMSListActivity extends UpnpListenerActivity {
 
 			finish();
 			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-			startActivity(intent);	// StartActivity 로 Intect object를 넘겨줘야만 putExtra 값이 Save된다.
+			startActivity(intent);	// StartActivity &#xfffd;?Intect object&#xfffd;??&#xfffd;&#xaca8;&#xc918;&#xc57c;&#xfffd;?putExtra &#xac12;&#xc774; Save?&#xfffd;&#xb2e4;.*/
 		}
 	};
 

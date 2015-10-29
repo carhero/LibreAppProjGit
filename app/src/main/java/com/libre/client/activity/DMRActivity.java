@@ -87,13 +87,13 @@ public class DMRActivity extends BaseActivity {
 				m_myApp.setCurrentDmrDeviceUdn(LibreApplication.LOCAL_UDN);
 
 				// yhcha modify
-				/*startActivity(new Intent(DMRActivity.this, MainActivity.class));
-				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);*/
+				startActivity(new Intent(DMRActivity.this, MainActivity.class));
+				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 
-				// yhcha, DMR 선택 후 List Name을 저장 후 MainSeletPage로 전환한다.
+				/*// yhcha, DMR 선택 후 List Name을 저장 후 MainSeletPage로 전환한다.
 				Intent getValue = getIntent();
 				Intent intent = new Intent(DMRActivity.this, MainSelectPage.class);
-				// 이전에 Saved된 값을 override한다.
+
 				intent.putExtra("SongListName", getValue.getStringExtra("SongListName"));	// save current selected device name
 
 				// 새로운 값을 저장한다.
@@ -104,7 +104,7 @@ public class DMRActivity extends BaseActivity {
 
 				finish();
 				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-				startActivity(intent);
+				startActivity(intent);*/
 
 				/*finish();
 				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);*/
@@ -301,12 +301,12 @@ public class DMRActivity extends BaseActivity {
 					DMRDev dev = devView;
 
 					// yhcha modify
-					/*m_myApp.setCurrentDmrDeviceUdn(dev.getUuid());
+					m_myApp.setCurrentDmrDeviceUdn(dev.getUuid());
 					m_myApp.setSpeakerName(dev.getDevName());
-					masterActivtiy.startActivity(new Intent(masterActivtiy, MainActivity.class));*/
-
+					masterActivtiy.startActivity(new Intent(masterActivtiy, MainActivity.class));
+					overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 					// yhcha, DMR 선택 후 List Name을 저장 후 MainSeletPage로 전환한다.
-					Intent getValue = getIntent();
+					/*Intent getValue = getIntent();
 
 					Intent intent = new Intent(DMRActivity.this, MainSelectPage.class);
 
@@ -323,7 +323,7 @@ public class DMRActivity extends BaseActivity {
 
 					finish();
 					overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-					startActivity(intent);
+					startActivity(intent);*/
 
 					/*Toast.makeText(getApplicationContext(), "dev.getDevName()" + dev.getDevName(), Toast.LENGTH_LONG).show();
 					Log.d(TAG, "dev.getDevName() = " + dev.getDevName());*/

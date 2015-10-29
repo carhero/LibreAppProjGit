@@ -1,15 +1,11 @@
 package com.libre.client.activity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,13 +19,11 @@ import android.widget.Toast;
 import com.app.dlna.dmc.processor.impl.UpnpProcessorImpl;
 import com.app.dlna.dmc.processor.interfaces.DMRProcessor;
 import com.app.dlna.dmc.processor.interfaces.UpnpProcessor;
-import com.libre.client.AppPreference;
 import com.libre.client.WifiConnect;
 import com.libre.client.activity.listview.MainSelectListSeg;
 import com.libre.client.util.DMRControlHelper;
 import com.libre.client.util.PlaybackHelper;
 import com.libre.client.util.UpnpDeviceManager;
-import com.libre.constants.WIFICONST;
 
 import org.fourthline.cling.model.message.UpnpResponse;
 import org.fourthline.cling.model.meta.Action;
@@ -83,9 +77,8 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 	private PLAY_STATE m_currentPlayState = PLAY_STATE.STOP;
 
 
-
-
-	Handler wifihandler = new Handler() {
+	// yhcha, block
+	/*Handler wifihandler = new Handler() {
 		@SuppressLint("InflateParams")
 		@Override
 		public void handleMessage(Message msg) {
@@ -95,24 +88,24 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 			if (msg.what == WIFICONST.NETWORK_CHANGED)
 			{
 
-				/*Log.v(TAG,"Net changed in MainActivity");
+				*//*Log.v(TAG,"Net changed in MainActivity");
 				for (Iterator<String> i = LibreApplication.PLAYBACK_HELPER_MAP.keySet().iterator(); i.hasNext(); ) {
 					String key = i.next();
 					LibreApplication.PLAYBACK_HELPER_MAP.get(key).getDmrHelper().getDmrProcessor().dispose();
 				}
 				m_playbackHelper=null;
-				m_myApp.setCurrentDmrDeviceUdn(LibreApplication.LOCAL_UDN);*/
+				m_myApp.setCurrentDmrDeviceUdn(LibreApplication.LOCAL_UDN);*//*
 
 				restartneeded=true;
 
-				/*if (m_upnpProcessor != null) {
+				*//*if (m_upnpProcessor != null) {
 					m_upnpProcessor.removeListener(UpnpDeviceManager.getInstance());
 					m_upnpProcessor.unbindUpnpService();
 					//m_upnpProcessor.stopMusicServer();
 				}
 				//m_upnpProcessor = new UpnpProcessorImpl(MainActivity.this);
 				m_upnpProcessor.bindUpnpService();
-				m_upnpProcessor.addListener(UpnpDeviceManager.getInstance());*/
+				m_upnpProcessor.addListener(UpnpDeviceManager.getInstance());*//*
 
 
 			}
@@ -171,7 +164,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 			}
 		}
 
-	};
+	};*/
 	private void DisplayAlert(String msg){
 
 		final AlertDialog alertDialog1 = new AlertDialog.Builder(
@@ -379,7 +372,8 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 		listView.setAdapter(newAdapter);
 		listView.refreshDrawableState();
 
-		if(Source[0] != null || Source[1] != null )
+		// yhcha, block
+		/*if(Source[0] != null || Source[1] != null )
 		{
 			//adapter.getTextSourceNameAtindex().setTextColor(0xFF0000FF);
 		}
@@ -401,7 +395,7 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 		{
 			Log.d("Main Activity", "Null Error!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			return;
-		}
+		}*/
 		/*m_playbackHelper = m_myApp.getCurrentPlaybackHelper();
 		if (m_playbackHelper == null) {
 			if (udn.equals(LibreApplication.LOCAL_UDN)) return;
@@ -444,9 +438,10 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 		//resetPlayBackScreen();
 
-		if (m_dmrControlHelper.isLocalDevice()) {
-			/*m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
-			m_sb_volume.setProgress(m_dmrProcessor.getVolume());*/
+		// yhcha, block
+		/*if (m_dmrControlHelper.isLocalDevice()) {
+			*//*m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
+			m_sb_volume.setProgress(m_dmrProcessor.getVolume());*//*
 			//	m_speakername.setText(m_dmrControlHelper.getDmrDisplayName());
 		}
 		else
@@ -455,13 +450,13 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 				LibreApplication.PLAYBACK_HELPER_MAP.get(LibreApplication.LOCAL_UDN)
 						.getDmrHelper().getDmrProcessor().reset();
 			}
-			/*m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
+			*//*m_sb_volume.setMax(m_dmrProcessor.getMaxVolume());
 			m_sb_volume.setProgress(m_dmrProcessor.getVolume());
-			m_speakername.setText(m_myApp.getSpeakerName());*/
+			m_speakername.setText(m_myApp.getSpeakerName());*//*
 		}
 		//handler.sendEmptyMessage(0x01);
 
-		// Refresh DMS Name	by yhcha
+		// Refresh DMS Name	by yhcha*/
 	}
 
 	public MainSelectPage() {
@@ -485,19 +480,22 @@ public class MainSelectPage extends BaseActivity implements DMRProcessor.DMRProc
 
 	@Override
 	protected void processLogic() {
-		m_myApp = (LibreApplication)getApplication();
+		// yhcha, block
+		//m_myApp = (LibreApplication)getApplication();
+
 		/*ViewGroup.LayoutParams imgParams = m_songimg.getLayoutParams();
 		imgParams.width = m_myApp.getImageViewSize();
 		imgParams.height = m_myApp.getImageViewSize();
 		m_songimg.setLayoutParams(imgParams);*/
+
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		m_upnpProcessor = new UpnpProcessorImpl(MainSelectPage.this);
 		m_upnpProcessor.bindUpnpService();
 		m_upnpProcessor.addListener(UpnpDeviceManager.getInstance());
 
-		AppPreference.PREF = PreferenceManager.getDefaultSharedPreferences(MainSelectPage.this);
+		//AppPreference.PREF = PreferenceManager.getDefaultSharedPreferences(MainSelectPage.this);
 
-		NetworkStateReceiver.registerforNetchange(wifihandler);
+		//NetworkStateReceiver.registerforNetchange(wifihandler);
 
 	}
 

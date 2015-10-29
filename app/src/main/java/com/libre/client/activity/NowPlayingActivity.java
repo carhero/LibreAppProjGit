@@ -205,11 +205,8 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
 		m_upnpProcessor = new UpnpProcessorImpl(NowPlayingActivity.this);
 		m_upnpProcessor.bindUpnpService();
 		m_upnpProcessor.addListener(UpnpDeviceManager.getInstance());
-
 		AppPreference.PREF = PreferenceManager.getDefaultSharedPreferences(NowPlayingActivity.this);
-
 		NetworkStateReceiver.registerforNetchange(wifihandler);
-
 	}
 
 	@Override
@@ -218,6 +215,9 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
         super.onCreate(paramBundle);
         Log.d(TAG,"OnCreate");
         PlaybackHelper.MAIN_CONTEXT = this;
+
+		//m_dmrProcessor = m_dmrControlHelper.getDmrProcessor();
+
 		getSupportActionBar().hide();	//yhcha
 	}
 
@@ -241,7 +241,6 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
 
 		Log.d(TAG, "udn name is:" + m_myApp.getCurrentDmrDeviceUdn());
 
-
 		if (udn == null || udn == "")
 		{
 			Log.d(TAG, "udn is NULL!!!!!!!!!!");
@@ -259,6 +258,8 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
 					m_upnpProcessor.getControlPoint(), deviceMeta, service);
 			m_playbackHelper = new PlaybackHelper(dmrControl);
 			LibreApplication.PLAYBACK_HELPER_MAP.put(udn, m_playbackHelper);
+
+			Log.d(TAG, "m_playbackHelper is NULL !!!");
 		}
 		m_dmrControlHelper = m_playbackHelper.getDmrHelper();
 		m_dmrProcessor = m_dmrControlHelper.getDmrProcessor();
@@ -285,6 +286,7 @@ public class NowPlayingActivity extends BaseActivity implements DMRProcessorList
 			}
 		}
 
+		Log.d(TAG, "m_myApp.isPlayNewSong() : " + m_myApp.isPlayNewSong());
 	}
 
 	private void handleUI() {

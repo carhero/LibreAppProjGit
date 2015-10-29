@@ -112,12 +112,12 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 				startActivity(intent);
 				finish();
 				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-
 			}
 		});
 		
 		m_textHeadLine = (TextView) findViewById(R.id.choosesong);
 
+		/*	yhcha, modify
 		// yhcha Local Music browse mode option
 		// 1. load saved DMS info
 		Intent intent = getIntent();
@@ -133,7 +133,7 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		{
 			Toast.makeText(getApplicationContext(), intent.getStringExtra("SongListName") ,Toast.LENGTH_LONG).show();
 		}
-
+		*/
 		//Log.d("DMSListActivity", "My device clicked");
 
 
@@ -227,9 +227,18 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		if (m_myApp.getCurrentPlaybackHelper() != null) {
 			m_myApp.getCurrentPlaybackHelper().setDmsHelper(m_browseHelper.clone());
 		}
-		//Intent intent = new Intent(this, MainActivity.class);	//yhcha, changed now playing pages
+
+		//startActivity(new Intent(getActivity(), MainActivity.class));
+
+		Intent intent = new Intent(this, MainActivity.class);	//yhcha, changed now playing pages
+        startActivity(intent);
+
+/*		Intent getValue = getIntent();
+
+		m_myApp.setCurrentDmrDeviceUdn(getValue.getStringExtra("PlayerUuid"));
+		m_myApp.setSpeakerName(getValue.getStringExtra("PlayerName"));
 		Intent intent = new Intent(this, NowPlayingActivity.class);	//yhcha, changed now playing pages
-		startActivity(intent);
+		startActivity(intent);*/
 
 		Log.d(TAG, "play");
 	}
@@ -294,7 +303,7 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 
 									@Override
 									public void onClick(DialogInterface dialog,
-														int which) {
+											int which) {
 										//TODO act failed
 										onBackPressed();
 									}
@@ -326,7 +335,8 @@ public class DMSBrowserActivity extends UpnpListenerActivity implements DMSProce
 		// TODO Auto-generated method stub
 		m_browseHelper = m_myApp.getDmsBrowseHelperTemp();
 		if (m_browseHelper == null) return;
-		
+
+		//Log.d(TAG, )
 		Device dmsDev = m_browseHelper.getDevice(UpnpDeviceManager.getInstance());
 		m_browseObjectStack = (Stack<DIDLObject>) m_browseHelper.getBrowseObjectStack().clone();
 
